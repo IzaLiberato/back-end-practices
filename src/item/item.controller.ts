@@ -9,6 +9,7 @@ export class ItemController {
 
   @Post()
   create(@Body() createItemDto: CreateItemDto) {
+    console.log(createItemDto);
     return this.itemService.create(createItemDto);
   }
 
