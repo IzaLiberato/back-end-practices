@@ -58,7 +58,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-# 
+# CRUD
 ```
 https://www.sidechannel.blog/criando-uma-api-com-nestjs/
 ```
