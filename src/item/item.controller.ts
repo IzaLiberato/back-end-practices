@@ -20,16 +20,57 @@ export class ItemController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.itemService.findOne(+id);
+    return this.itemService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-    return this.itemService.update(+id, updateItemDto);
+    return this.itemService.update(id, updateItemDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.itemService.remove(+id);
+    return this.itemService.remove(id);
   }
 }
+/*import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateItemDto } from './dto/create-item.dto';
+import { UpdateItemDto } from './dto/update-item.dto';
+import { Item } from './entities/item.entity';
+
+@Injectable()
+export class ItemService {
+ constructor(@InjectRepository(Item) private readonly repository: Repository<Item>) { }
+
+ create(createItemDto: CreateItemDto): Promise<Item> {
+   const item = this.repository.create(createItemDto);
+   return this.repository.save(item);
+ }
+
+ findAll(): Promise<Item[]> {
+   return this.repository.find();
+ }
+
+ findOne(id: string): Promise<Item> {
+   return this.repository.findOne(id);
+ }
+
+ async update(id: string, updateItemDto: UpdateItemDto): Promise<Item> {
+   const item = await this.repository.preload({
+     id: id,
+     ...updateItemDto,
+   });
+   if (!item) {
+     throw new NotFoundException(`Item ${id} not found`);
+   }
+   return this.repository.save(item);
+ }
+
+ async remove(id: string) {
+   const item = await this.findOne(id);
+   return this.repository.remove(item);
+ }
+}
+*/
